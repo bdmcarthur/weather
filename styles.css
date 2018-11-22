@@ -1,5 +1,28 @@
-h2 {
+body {
+    font-family: 'Montserrat', sans-serif;
     text-transform: capitalize;
+}
+
+#header {
+    text-align: center;
+
+}
+
+h1 {
+    float: left;
+    font-size: 50px;
+    margin-top: 0;
+}
+
+#input {
+    float: right;
+    margin-top: 20px;
+}
+
+input {
+    width: 250px;
+    height: 30px;
+    margin-right: 20px;
 }
 
 
@@ -29,21 +52,9 @@ h2 {
         flex: 0 0 auto;
       }
 
-.day {
-    color: red;
-}
-
-
-
-
-
-
-
-
 .forecast {
     display: flex;
     justify-content: center;
-    border: 5px solid red;
     width: 1000px;
     margin: auto;
 }
@@ -53,7 +64,38 @@ h2 {
 }
 
 .day {
-    border: 1px solid black;
-    height: 400px;
+    display: inline-block;
+    text-align: center;
+    font-size: 16px;
+    margin: 0 40px 0 40px;
+}
 
+img {
+    margin: auto;
+    width: 80px;
+    height: 80px;
+}
+
+button {
+  box-sizing: content-box;
+  width: 80px;
+  height: 20px;
+  cursor: pointer;
+  margin: 0 auto;
+  border: 2px solid gray;
+  font-size: 14px;
+  border-radius: 40px;
+  color: gray;
+  text-align: center;
+  background: rgba(0,0,0,0);
+}
+
+button:hover {
+  color: rgba(255,255,255,1);
+  background: rgb(30, 205, 151);
+}
+
+button:active {
+  border: 2px solid rgba(33,224,163,1);
+  background: rgba(33,224,163,1);
 }
