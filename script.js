@@ -5,16 +5,33 @@ var h2 = document.querySelector("h2")
 
 submit.addEventListener("click", function(){
     var input = inputBox[0].value
-    var api = "http://api.apixu.com/v1/current.json?key=bf10e7e3ac4e48808c030519182211&q=" + input
-    doThis(api, input)
+    var apiCurrent = "http://api.apixu.com/v1/current.json?key=bf10e7e3ac4e48808c030519182211&q=" + input
+    var apiForecast = "http://api.apixu.com/v1//forecast.json?key=bf10e7e3ac4e48808c030519182211&q=" + input + "&days=5"
+    doThis(apiCurrent, apiForecast, input)
 })
 
 
-function doThis(key, input){
-fetch(key).then(response => {
+function doThis(apiCurrent, apiForecast, input){
+fetch(apiCurrent).then(response => {
   return response.json();
-}).then(data => {
-}).catch(err => {
-  // Do something for an error here
-});
+}).then(currData => {
+    currentTemp = currData.current.temp_f
+    currentRain = currData.current.precip_in
+    h2.innerHTML = "Weather for " + currData.location.name + ", " + currData.location.region
+
+fetch(apiForecast).then(response => {
+     return response.json();
+}).then(foreData => {
+
+    for(var i = 0; i < 5; i++){
+        foreData.forecast.forecastday[i].date
+        foreData.forecast.forecastday[i].day.maxtemp_f
+
+}
+
+
+})
+
+}
+);
 }
