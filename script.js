@@ -2,8 +2,18 @@ var inputBox = document.getElementsByName("location")
 var submit = document.querySelector("button")
 var h2 = document.querySelector("h2")
 var currentCondition = document.getElementById("description")
+var hiddenClassCurr = document.querySelector(".current")
+var hiddenClassFore = document.querySelectorAll(".day")
 
+//enter button listener
+input.addEventListener("keyup", function(event) {
+  event.preventDefault();
+  if (event.keyCode === 13) {
+    submit.click();
+  }
+});
 
+//submit button listener
 submit.addEventListener("click", function(){
     removeWeather();
     var input = inputBox[0].value
@@ -18,15 +28,21 @@ function getWeather(apiCurrent, apiForecast, input){
 fetch(apiCurrent).then(response => {
     return response.json();
 }).then(currData => {
-        var currentTemp = currData.current.temp_f + " ℉";
+        var currentTemp = currData.current.temp_f + "℉";
         var cond = currData.current.condition.text;
         var currArr = [currentTemp, cond]
+        hiddenClassCurr.style.visibility = "visible";
+            for(var i =0; i < hiddenClassFore.length; i++){
+                hiddenClassFore[i].style.visibility = "visible";
+            }
+
         h2.innerHTML = currData.location.name + ", " + currData.location.region
 
         for(var i = 0; i < currArr.length; i++){
             var p = document.createElement("p");
             p.innerHTML =  currArr[i]
             currentCondition.appendChild(p);
+            p.className = "p" + (i + 1);
         }
 
         //add icon
@@ -69,6 +85,7 @@ fetch(apiForecast).then(response => {
 }
 })});}
 
+//removes all existing weather data when submit is clicked
 function removeWeather(){
     var h2 = document.querySelector("h2")
     h2.innerHTML = ""
@@ -83,4 +100,8 @@ function removeWeather(){
     img[i].remove();
     }
 
+    hiddenClassCurr.style.visibility = "hidden";
+    for(var i =0; i < hiddenClassFore.length; i++){
+        hiddenClassFore[i].style.visibility = "hidden";
+    }
 }
