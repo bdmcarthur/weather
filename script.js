@@ -5,10 +5,12 @@ var currentCondition = document.getElementById("description")
 
 
 submit.addEventListener("click", function(){
+    removeWeather();
     var input = inputBox[0].value
     var apiCurrent = "http://api.apixu.com/v1/current.json?key=bf10e7e3ac4e48808c030519182211&q=" + input
     var apiForecast = "http://api.apixu.com/v1//forecast.json?key=bf10e7e3ac4e48808c030519182211&q=" + input + "&days=5"
     getWeather(apiCurrent, apiForecast, input)
+
 })
 
 function getWeather(apiCurrent, apiForecast, input){
@@ -17,9 +19,8 @@ fetch(apiCurrent).then(response => {
     return response.json();
 }).then(currData => {
         var currentTemp = currData.current.temp_f + " ℉";
-        var currentRain = "Rain is " + currData.current.precip_in; + " in."
         var cond = currData.current.condition.text;
-        var currArr = [currentTemp, currentRain, cond]
+        var currArr = [currentTemp, cond]
         h2.innerHTML = currData.location.name + ", " + currData.location.region
 
         for(var i = 0; i < currArr.length; i++){
@@ -56,7 +57,7 @@ fetch(apiForecast).then(response => {
                 var p = document.createElement("p");
                 p.innerHTML =  conditionArr[i];
                 dayId.appendChild(p);
-                console.log(conditionArr[i])
+
                 }}
                 para(conditionArr);
 
@@ -67,3 +68,19 @@ fetch(apiForecast).then(response => {
 
 }
 })});}
+
+function removeWeather(){
+    var h2 = document.querySelector("h2")
+    h2.innerHTML = ""
+
+    var p = document.querySelectorAll("p")
+    for(var i = 0; i < p.length; i++){
+    p[i].remove();
+    }
+
+    var img = document.querySelectorAll("img")
+    for(var i = 0; i < img.length; i++){
+    img[i].remove();
+    }
+
+}

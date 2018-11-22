@@ -1,6 +1,8 @@
 body {
     font-family: 'Montserrat', sans-serif;
     text-transform: capitalize;
+    background-image: url("background.jpg");
+    background-size: cover;
 }
 
 #header {
@@ -11,6 +13,7 @@ body {
 }
 
 h2 {
+    font-size: 40px;
     margin-bottom: 0;
     text-align: center;
 }
@@ -51,7 +54,8 @@ input {
     display: inline-block;
     font-size: 20px;
     text-align: center;
-    margin: 55px auto 55px auto;
+    margin: 71px auto 71px auto;
+    width: 100px;
     }
 
 p {
@@ -75,7 +79,9 @@ p {
     display: inline-block;
     text-align: center;
     font-size: 16px;
+    color: white;
     margin: 0 40px 0 40px;
+    background-color: rgba(0, 0, 0, .6)
 }
 
 img {
