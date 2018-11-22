@@ -24,11 +24,16 @@ fetch(apiForecast).then(response => {
 }).then(foreData => {
 
     for(var i = 0; i < 5; i++){
-        foreData.forecast.forecastday[i].date
-        foreData.forecast.forecastday[i].day.maxtemp_f
+        //adds dates and temps
+        var dayId = document.getElementById("day" + (i + 1))
+        dayId.innerHTML = foreData.forecast.forecastday[i].date + " " + "High " + foreData.forecast.forecastday[i].day.maxtemp_f
+
+        //adds icons
+        var img = document.createElement("img");
+        img.src = "http:" + foreData.forecast.forecastday[i].day.condition.icon;
+        dayId.appendChild(img);
 
 }
-
 
 })
 

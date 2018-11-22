@@ -1,3 +1,59 @@
 h2 {
     text-transform: capitalize;
 }
+
+
+.current {
+    display: flex;
+    /* justify-content: center; */
+    border: 5px solid red;
+    width: 1000px;
+    height: 200px;
+    margin: 20px auto 20px auto; */
+}
+
+.today {
+    border: 5px solid blue;
+    margin:0;
+}
+
+.current {
+        display: flex;
+      }
+
+.current :first-child {
+        width: 250px;
+      }
+
+.current > * {
+        flex: 0 0 auto;
+      }
+
+.day {
+    color: red;
+}
+
+
+
+
+
+
+
+
+.forecast {
+    display: flex;
+    justify-content: center;
+    border: 5px solid red;
+    width: 1000px;
+    margin: auto;
+}
+
+.forecast > div {
+    flex: 1;
+}
+
+.day {
+    border: 1px solid black;
+    height: 400px;
+
+}
