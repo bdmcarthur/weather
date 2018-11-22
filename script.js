@@ -16,25 +16,32 @@ function getWeather(apiCurrent, apiForecast, input){
 fetch(apiCurrent).then(response => {
     return response.json();
 }).then(currData => {
-        currentTemp = currData.current.temp_f
-        currentRain = currData.current.precip_in
-        var cond = currData.current.condition.text
-        currentCondition.innerHTML = cond;
-        h2.innerHTML = "Weather for " + currData.location.name + ", " + currData.location.region
-        console.log(currData.current.condition.icon)
+        var currentTemp = currData.current.temp_f + " ℉";
+        var currentRain = "Rain is " + currData.current.precip_in; + " in."
+        var cond = currData.current.condition.text;
+        var currArr = [currentTemp, currentRain, cond]
+        h2.innerHTML = currData.location.name + ", " + currData.location.region
+
+        for(var i = 0; i < currArr.length; i++){
+            var p = document.createElement("p");
+            p.innerHTML =  currArr[i]
+            currentCondition.appendChild(p);
+        }
 
         //add icon
         var icon = document.getElementById("icon");
         var img = document.createElement("img");
         img.src = "http:" + currData.current.condition.icon;
-        icon.appendChild(img);
+        icon.appendChild(img)
+        img.className = "imgCurrent";
+
 
 //get forecast data
 fetch(apiForecast).then(response => {
      return response.json();
 }).then(foreData => {
     for(var i = 0; i < 5; i++){
-        //var conditionArr = [];
+
         //adds dates and temps
         var dayId = document.getElementById("day" + (i + 1))
         var date = foreData.forecast.forecastday[i].date
