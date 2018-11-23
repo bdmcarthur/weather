@@ -28,7 +28,7 @@ function getWeather(apiCurrent, apiForecast, input){
 fetch(apiCurrent).then(response => {
     return response.json();
 }).then(currData => {
-        var currentTemp = currData.current.temp_f + "℉";
+        var currentTemp = parseInt(currData.current.temp_f) + "℉";
         var cond = currData.current.condition.text;
         var currArr = [currentTemp, cond]
         hiddenClassCurr.style.visibility = "visible";
@@ -61,9 +61,9 @@ fetch(apiForecast).then(response => {
 
         //adds dates and temps
         var dayId = document.getElementById("day" + (i + 1))
-        var date = foreData.forecast.forecastday[i].date
-        var highTemp = "High: " + foreData.forecast.forecastday[i].day.maxtemp_f + " ℉"
-        var lowTemp = "Low: " + foreData.forecast.forecastday[i].day.mintemp_f + " ℉"
+        var date = dateFormat(foreData.forecast.forecastday[i].date)
+        var highTemp = "High: " + parseInt(foreData.forecast.forecastday[i].day.maxtemp_f) + " ℉"
+        var lowTemp = "Low: " + parseInt(foreData.forecast.forecastday[i].day.mintemp_f) + " ℉"
         var cond = foreData.forecast.forecastday[i].day.condition.text;
         var conditionArr = [date, cond, highTemp, lowTemp]
 
@@ -73,9 +73,8 @@ fetch(apiForecast).then(response => {
                 var p = document.createElement("p");
                 p.innerHTML =  conditionArr[i];
                 dayId.appendChild(p);
-
                 }}
-                para(conditionArr);
+        para(conditionArr);
 
         //adds icons
         var img = document.createElement("img");
@@ -104,4 +103,12 @@ function removeWeather(){
     for(var i =0; i < hiddenClassFore.length; i++){
         hiddenClassFore[i].style.visibility = "hidden";
     }
+}
+
+function dateFormat(date){
+    var year = date.slice(0,4);
+    var month = date.slice(5,7);
+    var day = date.slice(8);;
+    finalDate = month + "/" + day + "/" + year
+    return finalDate
 }

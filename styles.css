@@ -2,7 +2,7 @@ body {
     font-family: 'Montserrat', sans-serif;
     text-transform: capitalize;
     background-image: url("background.jpg");
-    background-size: cover;
+    background-size: 100%;
     color: white;
 }
 
@@ -21,7 +21,7 @@ h2 {
 
 h1 {
     float: left;
-    font-size: 50px;
+    font-size: 70px;
     margin-top: 0;
 }
 
@@ -42,7 +42,7 @@ input {
     width: 300px;
     border: 1px solid white;
     padding: 10px 0 10px 0;
-    background-color: rgba(0, 0, 0, .3);
+    background-color: rgba(0, 0, 0, .7);
     visibility: hidden;
     }
 
@@ -53,6 +53,7 @@ input {
      margin:10px 0 10px 0;
      float: left;
      text-align: center;
+     postion: none;
     }
 
 #description {
@@ -63,6 +64,7 @@ input {
 p {
     margin-top: 10px;
     margin-bottom: 5px;
+    font-size: 16px
     }
 
 .p1 {
@@ -78,7 +80,7 @@ p {
 .forecast {
     display: flex;
     justify-content: center;
-    width: 1000px;
+    width: 1300px;
     margin: 50px auto auto auto;
 }
 
@@ -88,20 +90,27 @@ p {
 
 .day {
     display: inline-block;
+    position: relative;
+    height: 230px;
     text-align: center;
     font-size: 16px;
     color: white;
     margin: 0 15px 0 15px;
     border: 1px solid white;
-    background-color: rgba(0, 0, 0, .3);
+    background-color: rgba(0, 0, 0, .7);
     visibility: hidden;
 
 }
 
-img {
-    margin: auto;
+.day img {
+    margin: 0 auto 0 auto;
     width: 80px;
     height: 80px;
+    position:absolute;
+    bottom:0;
+    right:0;
+    left:0;
+    text-align: center;
 }
 
 button {
