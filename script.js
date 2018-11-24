@@ -1,9 +1,13 @@
-var inputBox = document.getElementsByName("location")
-var submit = document.querySelector("button")
-var h2 = document.querySelector("h2")
-var currentCondition = document.getElementById("description")
-var hiddenClassCurr = document.querySelector(".current")
-var hiddenClassFore = document.querySelectorAll(".day")
+var inputBox = document.getElementsByName("location");
+var submit = document.querySelector("button");
+var h2 = document.querySelector("h2");
+var currentCondition = document.getElementById("description");
+var hiddenClassCurr = document.querySelector(".current");
+var hiddenClassFore = document.querySelectorAll(".day");
+var apiKeyCurr = "http://api.apixu.com/v1/current.json?key=bf10e7e3ac4e48808c030519182211&q=";
+var apiKeyFore = "http://api.apixu.com/v1//forecast.json?key=bf10e7e3ac4e48808c030519182211&q=";
+
+getLocation()
 
 //enter button listener
 input.addEventListener("keyup", function(event) {
@@ -17,26 +21,46 @@ input.addEventListener("keyup", function(event) {
 submit.addEventListener("click", function(){
     removeWeather();
     var input = inputBox[0].value
-    var apiCurrent = "http://api.apixu.com/v1/current.json?key=bf10e7e3ac4e48808c030519182211&q=" + input
-    var apiForecast = "http://api.apixu.com/v1//forecast.json?key=bf10e7e3ac4e48808c030519182211&q=" + input + "&days=5"
+    var apiCurrent = apiKeyCurr + input
+    var apiForecast = apiKeyFore  + input + "&days=5"
     getWeather(apiCurrent, apiForecast, input)
 
 })
 
-function getWeather(apiCurrent, apiForecast, input){
+//gets current location and displays as default
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        h2.innerHTML = "Please enter a location.";
+    }
+}
+
+function showPosition(position) {
+    coordinates = position.coords.latitude + ", " + position.coords.longitude
+    console.log(coordinates)
+    if (coordinates.length > 0){
+        apiCurrLat = apiKeyCurr + coordinates
+        apiForeLat = apiKeyFore + coordinates + "&days=5"
+        getWeather(apiCurrLat, apiForeLat)
+    }
+}
+
+function getWeather(apiCurrent, apiForecast){
 //get current data
 fetch(apiCurrent).then(response => {
     return response.json();
 }).then(currData => {
         var currentTemp = parseInt(currData.current.temp_f) + "℉";
-        var cond = currData.current.condition.text;
-        var currArr = [currentTemp, cond]
+        var currentCond = currData.current.condition.text;
+        var currArr = [currentTemp, currentCond]
         hiddenClassCurr.style.visibility = "visible";
             for(var i =0; i < hiddenClassFore.length; i++){
                 hiddenClassFore[i].style.visibility = "visible";
             }
 
         h2.innerHTML = currData.location.name + ", " + currData.location.region
+
 
         for(var i = 0; i < currArr.length; i++){
             var p = document.createElement("p");
@@ -48,7 +72,7 @@ fetch(apiCurrent).then(response => {
         //add icon
         var icon = document.getElementById("icon");
         var img = document.createElement("img");
-        img.src = "http:" + currData.current.condition.icon;
+        img.src = currData.current.condition.icon.slice(16);
         icon.appendChild(img)
         img.className = "imgCurrent";
 
@@ -59,26 +83,26 @@ fetch(apiForecast).then(response => {
 }).then(foreData => {
     for(var i = 0; i < 5; i++){
 
-        //adds dates and temps
-        var dayId = document.getElementById("day" + (i + 1))
-        var date = dateFormat(foreData.forecast.forecastday[i].date)
-        var highTemp = "High: " + parseInt(foreData.forecast.forecastday[i].day.maxtemp_f) + " ℉"
-        var lowTemp = "Low: " + parseInt(foreData.forecast.forecastday[i].day.mintemp_f) + " ℉"
+        var dayId = document.getElementById("day" + (i + 1));
+        var date = dateFormat(foreData.forecast.forecastday[i].date);
+        var highTemp = "High: " + parseInt(foreData.forecast.forecastday[i].day.maxtemp_f) + " ℉";
+        var lowTemp = "Low: " + parseInt(foreData.forecast.forecastday[i].day.mintemp_f) + " ℉";
         var cond = foreData.forecast.forecastday[i].day.condition.text;
         var conditionArr = [date, cond, highTemp, lowTemp]
 
-        //adds conditions into separate paragraphs
+        //adds data into separate paragraphs
+        para(conditionArr);
         function para(conditionArr){
             for(var i=0; i < conditionArr.length; i++){
                 var p = document.createElement("p");
                 p.innerHTML =  conditionArr[i];
                 dayId.appendChild(p);
-                }}
-        para(conditionArr);
+                }
+            }
 
         //adds icons
         var img = document.createElement("img");
-        img.src = "http:" + foreData.forecast.forecastday[i].day.condition.icon;
+        img.src = foreData.forecast.forecastday[i].day.condition.icon.slice(16);
         dayId.appendChild(img);
 
 }
@@ -86,7 +110,6 @@ fetch(apiForecast).then(response => {
 
 //removes all existing weather data when submit is clicked
 function removeWeather(){
-    var h2 = document.querySelector("h2")
     h2.innerHTML = ""
 
     var p = document.querySelectorAll("p")

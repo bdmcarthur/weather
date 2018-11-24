@@ -13,6 +13,10 @@ body {
 
 }
 
+#needLocation {
+    display: block;
+}
+
 h2 {
     font-size: 40px;
     margin-bottom: 20px;
@@ -42,7 +46,7 @@ input {
     width: 300px;
     border: 1px solid white;
     padding: 10px 0 10px 0;
-    background-color: rgba(0, 0, 0, .7);
+    background-color: rgba(0, 0, 0, .5);
     visibility: hidden;
     }
 
@@ -64,7 +68,7 @@ input {
 p {
     margin-top: 10px;
     margin-bottom: 5px;
-    font-size: 16px
+    font-size: 18px
     }
 
 .p1 {
@@ -97,7 +101,7 @@ p {
     color: white;
     margin: 0 15px 0 15px;
     border: 1px solid white;
-    background-color: rgba(0, 0, 0, .7);
+    background-color: rgba(0, 0, 0, .5);
     visibility: hidden;
 
 }
@@ -119,20 +123,26 @@ button {
   height: 20px;
   cursor: pointer;
   margin: 0 auto;
-  border: 2px solid gray;
+  border: 1px solid white;
   font-size: 14px;
   border-radius: 40px;
-  color: gray;
+  color: white;
   text-align: center;
   background: rgba(0,0,0,0);
 }
 
 button:hover {
-  color: rgba(255,255,255,1);
-  background: rgb(30, 205, 151);
+border: 1px solid gray;
+  color: white;
+  background: gray;
 }
 
 button:active {
   border: 2px solid rgba(33,224,163,1);
   background: rgba(33,224,163,1);
+}
+
+::placeholder {
+    padding-left: 10px;
+    font-size: 12px;
 }
