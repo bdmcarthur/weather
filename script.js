@@ -11,6 +11,7 @@ getLocation()
 
 //enter button listener
 input.addEventListener("keyup", function(event) {
+    console.log(input)
   event.preventDefault();
   if (event.keyCode === 13) {
     submit.click();
