@@ -6,14 +6,16 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     color: white;
-    width: max-content;
+    margin: 0;
+    padding: 0;
 }
 
 #header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
     text-align: center;
-    margin-top: 0;
-    margin-left: 20px;
-    padding-bottom: 100px;
+    padding: 10px 40px;
 
 }
 
@@ -25,24 +27,22 @@ h2 {
     font-size: 40px;
     margin: 0 0 20px 0;
     text-align: center;
-    clear: both;
 }
 
 h1 {
-    float: left;
     font-size: 70px;
-    margin-top: 0;
+    margin: 0;
 }
 
 #input {
-    float: right;
+ 
     margin-top: 20px;
 }
 
 input {
     width: 250px;
     height: 30px;
-    margin-right: 20px;
+    margin: 0 20px;
 }
 
 .current {
@@ -50,7 +50,7 @@ input {
     flex-direction: column;
     text-align: center;
     margin: auto;
-    width: 300px;
+    width: 20%;
     background-color: rgba(0, 0, 0, .8);
     visibility: hidden;
     border-radius: 12px;
@@ -60,7 +60,7 @@ input {
 .imgCurrent {
      height: 100px;
      text-align: center;
-     padding-top:
+     
     }
 
 #description {
@@ -92,9 +92,9 @@ p {
 .forecast {
     display: flex;
     justify-content: center;
-    width: 1300px;
     margin: 50px auto auto auto;
     flex-wrap: wrap;
+    padding: 0 40px;
 }
 
 
@@ -102,15 +102,15 @@ p {
     display: flex;
     font-size: 16px;
     color: white;
-    margin: 0 15px 0 15px;
+    margin: 15px;
     background-color: rgba(0, 0, 0, .8);
     visibility: hidden;
     border-radius: 12px;
     flex-wrap: wrap;
-    align-content: center;
     flex-direction: column;
     text-align: center;
-    padding: 30px;
+    padding: 15px 5px;
+    flex: 1;
 }
 
 .day img {
@@ -124,7 +124,7 @@ button {
   width: 80px;
   height: 20px;
   cursor: pointer;
-  margin: 0 auto;
+  margin: 10px auto;
   border: 1px solid white;
   font-size: 14px;
   border-radius: 40px;
@@ -149,3 +149,13 @@ button:active {
     font-size: 12px;
 }
 
+@media (min-width: 320px) and (max-width: 768px) {
+    .current {
+        width: 80%;
+    }
+    
+    .day {
+        width: 60%;
+    }
+    
+  }

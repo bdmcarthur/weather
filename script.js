@@ -62,7 +62,6 @@ fetch(apiCurrent).then(response => {
 
         h2.innerHTML = currData.location.name + ", " + currData.location.region
 
-
         for(var i = 0; i < currArr.length; i++){
             var p = document.createElement("p");
             p.innerHTML =  currArr[i]
